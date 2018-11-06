@@ -17,8 +17,15 @@ class PetsController < ApplicationController
     end
   end
 
+  def create
+  pet = Pet.new(pet_params)
 
-
+    if pet.save
+      render json: {id: pet.id }
+    else
+      render_error(:bad_request, pet.errors.messages)
+    end
+  end
 
   private
 
